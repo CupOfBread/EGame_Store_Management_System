@@ -1,0 +1,64 @@
+server:
+  # 端口
+  port: 6060
+  servlet:
+    context-path: /basic-api
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://121.4.115.91:20000/egame_store?characterEncoding=UTF-8&useUnicode=true&useSSL=false&tinyInt1isBit=false&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: d7fe7366ee4f3972
+    type: com.alibaba.druid.pool.DruidDataSource
+
+  ############## Redis 配置 ##############
+  redis:
+    database: 1
+    host: 121.4.115.91
+    password: redis
+    timeout: 10s
+    port: 36379
+    lettuce:
+      pool:
+        # 连接池最大连接数
+        max-active: 200
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1ms
+        # 连接池中的最大空闲连接
+        max-idle: 10
+        # 连接池中的最小空闲连接
+        min-idle: 0
+
+
+############## Sa-Token 配置 ##############
+sa-token:
+  # token名称 (同时也是cookie名称)
+  token-name: TK
+  # token有效期，单位s 默认30天, -1代表永不过期
+  timeout: 2592000
+  # token临时有效期 (指定时间内无操作就视为token过期) 单位: 秒
+  activity-timeout: -1
+  # 是否允许同一账号并发登录 (为true时允许一起登录, 为false时新登录挤掉旧登录)
+  is-concurrent: true
+  # 在多人登录同一账号时，是否共用一个token (为true时所有登录共用一个token, 为false时每次登录新建一个token)
+  is-share: false
+  # token风格
+  token-style: tik
+  # 是否输出操作日志
+  is-log: false
+
+
+############## Knife4j 配置 ##############
+knife4j:
+  enable: true
+  setting:
+    language: zh_cn
+    swagger-model-name: 实体类列表
+  documents:
+    - name: 标题1
+      locations: classpath:markdown/*
+      group: default
+  basic:
+    enable: false
+    username: admin
+    password: 123456
